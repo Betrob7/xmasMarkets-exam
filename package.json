@@ -1,0 +1,25 @@
+{
+  "name": "xmasmarkets-exam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev" : "tsc --watch",
+    "build" : "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Betrob7/xmasMarkets-exam.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Betrob7/xmasMarkets-exam/issues"
+  },
+  "homepage": "https://github.com/Betrob7/xmasMarkets-exam#readme",
+  "dependencies": {
+    "typescript": "^5.9.3"
+  }
+}
