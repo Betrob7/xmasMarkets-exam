@@ -1,9 +1,6 @@
 const sectionSetup = () => {
-  // Hämta alla sektioner
   const sectionRefs = document.querySelectorAll(".page");
-  // Dölj alla sektioner
   sectionRefs.forEach((section) => section.classList.remove("active"));
-  // Visa startsektionen, t.ex. "home"
   const homeSection = document.getElementById("home");
   if (homeSection) homeSection.classList.add("active");
 };
@@ -17,11 +14,8 @@ const navSetup = () => {
   });
 };
 const toggleSectionDisplay = (section) => {
-  // Hämta alla sektioner
   const sections = document.querySelectorAll(".page");
-  // Dölj alla sektioner
   sections.forEach((s) => s.classList.remove("active"));
-  // Visa den valda sektionen
   if (section) {
     const selected = document.getElementById(section);
     if (selected) selected.classList.add("active");
@@ -99,9 +93,31 @@ const createSnowfall = (count = 50) => {
   };
   animate();
 };
+//Nedräkning till julafton
+const startCountdown = () => {
+  const countdownRef = document.getElementById("countdown-timer");
+  if (!countdownRef) return;
+  const christmasDate = new Date("2025-12-24T00:00:00").getTime();
+  const updateCountdown = () => {
+    const now = new Date().getTime();
+    const diff = christmasDate - now;
+    if (diff <= 0) {
+      countdownRef.textContent = "🎅 God Jul! 🎁";
+      return;
+    }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    countdownRef.textContent = `${days} dagar ${hours} timmar ${minutes} min ${seconds} sek`;
+  };
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+};
 sectionSetup();
 navSetup();
 marketsSetup();
 createSnowfall(100);
+startCountdown();
 
 //# sourceMappingURL=index.js.map

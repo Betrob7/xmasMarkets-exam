@@ -16,6 +16,13 @@ body {
   font-family: system-ui, sans-serif;
   background: #f7f4f0;
   color: #333;
+  display: flex;
+  justify-content: center; 
+  align-items: flex-start; 
+  min-height: 100vh;       
+  margin: 0;
+  padding: 0;
+
 }
 
 
@@ -51,7 +58,8 @@ header {
     background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  min-height: 100vh;
+  
 }
 
 .home__heading {
@@ -76,6 +84,27 @@ header {
     border-radius: 50%;
     opacity: 0.8;
 }
+
+#countdown-container {
+  margin-top: 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.25); /* semitransparent vit */
+  backdrop-filter: blur(10px); /* blur-effekten */
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: inline-block;
+}
+
+#countdown-timer {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff; 
+}
+
+
 
 
 /* Sidor */
@@ -140,10 +169,51 @@ header {
   color: #333;
 }
 
-
-/* Nedräkning */
-#countdown-timer {
-  font-size: 2rem;
-  margin-top: 1rem;
-  color: #b30000;
+#about {
+    min-height: 100vh;
 }
+
+.about__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.about__text {
+    color: #fff;
+}
+
+#about img {
+    max-width: 50%;
+    max-height: 50%;
+    border-radius: 10px;
+}
+
+.about__footer {
+    color: #fff;
+}
+
+.about__santa {
+    margin-left: 20rem;
+    max-width: 150px !important;
+    max-height: 150px !important;
+  animation: flyLeft 8s linear forwards; /* kör animationen */
+   animation-delay: 4s;
+}
+
+@keyframes flyLeft {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-50vw) rotate(-5deg); /* lite lutning åt vänster */
+  }
+  100% {
+    transform: translateX(-120vw) rotate(-10deg); /* utanför vänsterkanten */
+    opacity: 0; /* försvinner */
+  }
+}
+
+
+

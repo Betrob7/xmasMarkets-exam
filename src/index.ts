@@ -1,13 +1,13 @@
 import type {Market} from "./interfaces/Market.ts"
 
 const sectionSetup = (): void => {
-    // Hämta alla sektioner
+    
     const sectionRefs = document.querySelectorAll<HTMLElement>('.page');
     
-    // Dölj alla sektioner
+    
     sectionRefs.forEach(section => section.classList.remove('active'));
 
-    // Visa startsektionen, t.ex. "home"
+    
     const homeSection = document.getElementById('home');
     if (homeSection) homeSection.classList.add('active');
 };
@@ -16,7 +16,7 @@ const sectionSetup = (): void => {
 const navSetup = () : void => {
     const navItemRefs = document.querySelectorAll<HTMLUListElement>('.nav-item');
 
-    navItemRefs.forEach(navItem => {
+    navItemRefs.forEach((navItem: HTMLElement) => {
         navItem.addEventListener('click', (e : PointerEvent) : void => {
             console.log((e.target as HTMLElement).dataset.id);
             toggleSectionDisplay((e.target as HTMLElement).dataset.id);
@@ -25,13 +25,13 @@ const navSetup = () : void => {
 }
 
 const toggleSectionDisplay = (section: string | undefined): void => {
-    // Hämta alla sektioner
+    
     const sections = document.querySelectorAll<HTMLElement>('.page');
     
-    // Dölj alla sektioner
+  
     sections.forEach(s => s.classList.remove('active'));
 
-    // Visa den valda sektionen
+    
     if (section) {
         const selected = document.getElementById(section);
         if (selected) selected.classList.add('active');
@@ -129,7 +129,37 @@ const createSnowfall = (count: number = 50): void => {
     animate();
 };
 
+//Nedräkning till julafton
+const startCountdown = (): void => {
+  const countdownRef = document.getElementById('countdown-timer') as HTMLElement;
+  if (!countdownRef) return;
+
+  const christmasDate = new Date('2025-12-24T00:00:00').getTime();
+
+  const updateCountdown = (): void => {
+    const now = new Date().getTime();
+    const diff = christmasDate - now;
+
+    if (diff <= 0) {
+      countdownRef.textContent = '🎅 God Jul! 🎁';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    countdownRef.textContent = `${days} dagar ${hours} timmar ${minutes} min ${seconds} sek`;
+  };
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+};
+
+
 sectionSetup();
 navSetup();
 marketsSetup();
 createSnowfall(100);
+startCountdown();
