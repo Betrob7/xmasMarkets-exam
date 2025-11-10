@@ -63,9 +63,17 @@ const createMarketCard = (market: Market): HTMLElement => {
   const cardRef = document.createElement('article');
   cardRef.classList.add('market-card');
 
-  const template = `
+  const isFavorite = getFavorites().includes(market.id);
+
+  cardRef.innerHTML = `
     <section class="card-top">
       <img src="${market.img}" alt="${market.location}">
+      <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-id="${market.id}"><span class="not-fav">
+          <img src="./assets/santa-before.svg" alt="Add to favorites">
+        </span>
+        <span class="fav">
+          <img src="./assets/santa-after.svg" alt="Favorite">
+        </span></button>
     </section>
     <section class="card-middle">
       <h2>${market.location}</h2>
@@ -76,13 +84,37 @@ const createMarketCard = (market: Market): HTMLElement => {
     </section>
   `;
 
-  cardRef.innerHTML = template;
+ 
+  const favBtn = cardRef.querySelector<HTMLButtonElement>('.favorite-btn');
+  favBtn?.addEventListener('click', () => toggleFavorite(market.id, favBtn));
+
   return cardRef;
 };
 
+const getFavorites = (): number[] => {
+  const data = localStorage.getItem('favorites');
+  return data ? JSON.parse(data) : [];
+};
+
+const toggleFavorite = (id: number, btn?: HTMLElement) => {
+  const favorites = getFavorites();
+  const index = favorites.indexOf(id);
+
+  if (index > -1) {
+    favorites.splice(index, 1); // ta bort
+    btn?.classList.remove('active');
+  } else {
+    favorites.push(id); // lägg till
+    btn?.classList.add('active');
+  }
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+};
+
+
 const renderMarkets = (markets: Market[]) => {
   const container = document.querySelector('#markets-container') as HTMLElement;
-  container.innerHTML = ''; // rensa eventuell placeholder
+  container.innerHTML = ''; 
   markets.forEach(market => {
     const card = createMarketCard(market);
     container.appendChild(card);
