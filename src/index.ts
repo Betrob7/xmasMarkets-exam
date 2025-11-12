@@ -49,9 +49,6 @@ const marketsSetup = async (): Promise<void> => {
 
     const markets: Market[] = await response.json();
 
-    // sortera om du vill, t.ex. efter id eller datum
-    markets.sort((a, b) => a.id - b.id);
-
     renderMarkets(markets);
   } catch (error) {
     console.error('Något gick fel vid hämtning av marknader:', error);

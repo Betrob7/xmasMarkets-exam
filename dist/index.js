@@ -29,8 +29,6 @@ const marketsSetup = async () => {
     const response = await fetch("https://betrob7.github.io/julmarknader-api/data/xmasMarkets.json");
     if (!response.ok) throw new Error("Kunde inte hämta julmarknader");
     const markets = await response.json();
-    // sortera om du vill, t.ex. efter id eller datum
-    markets.sort((a, b) => a.id - b.id);
     renderMarkets(markets);
   } catch (error) {
     console.error("Något gick fel vid hämtning av marknader:", error);
