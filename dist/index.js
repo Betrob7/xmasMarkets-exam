@@ -52,7 +52,7 @@ const createMarketCard = (market) => {
     </section>
     <section class="card-middle">
       <h2>${market.location}</h2>
-      <h3>${market.date} • ${market.time}</h3>
+      <h3>${market.date} - ${market.time}</h3>
     </section>
     <section class="card-bottom">
       <p>${market.address}</p>
@@ -80,13 +80,14 @@ const toggleFavorite = (id, btn) => {
 };
 const renderMarkets = (markets) => {
   const container = document.querySelector("#markets-container");
+  if (!container) return;
   container.innerHTML = "";
   markets.forEach((market) => {
     const card = createMarketCard(market);
     container.appendChild(card);
   });
 };
-//funktion för snöfall
+//funktion för snöfall från chatgpt
 const createSnowfall = (count = 50) => {
   const container = document.querySelector(".snow-container");
   if (!container) return;
@@ -117,7 +118,7 @@ const createSnowfall = (count = 50) => {
   };
   animate();
 };
-//Nedräkning till julafton
+//Nedräkning till julafton från chatgpt
 const startCountdown = () => {
   const countdownRef = document.getElementById("countdown-timer");
   if (!countdownRef) return;
